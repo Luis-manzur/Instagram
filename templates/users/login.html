@@ -1,0 +1,23 @@
+{% extends "users/base.html" %}
+
+{% block head_content %}
+<title>Instagram Log In</title>
+{% endblock %}
+
+{% block container %}
+    {% if form.errors %}
+        <p class="alert alert-danger">Username or password is invalid.</p>
+    {% endif %}
+    <form action="{% url 'users:login' %}" method="post">
+        {% csrf_token %} 
+        <div class="form-group">
+            <input  type="text" name="username" id="username" placeholder="username" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" id="password" placeholder="password" class="form-control">
+        </div>
+        
+        <button class="btn btn-primary btn-block mt-5" type="submit">Log In</button>
+    </form>
+    <p class="mt-4">Don't have an account yet? <a href="{% url 'users:signup' %}">Sign up here</a></p>
+{% endblock %}

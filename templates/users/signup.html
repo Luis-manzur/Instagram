@@ -1,0 +1,71 @@
+{% extends "users/base.html" %}
+
+{% block head_content %}
+<title>Instagram Sign Up</title>
+{% endblock %}
+
+{% block container %}
+    <form action="{% url 'users:signup' %}" method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <input class="form-control {% if form.username.errors %}is-invalid{% endif %}" type="text" placeholder="Username" name="username" required="true" value="{% if form.errors %}{{ form.username.value }}{% endif %}" />
+            <div class="invalid-feedback">
+                {%if form.errors.username %}
+                    {{ form.errors.username }}
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <input class="form-control {% if form.password.errors %}is-invalid{% endif %}" type="password" placeholder="Password" name="password" required="true" />
+            <div class="invalid-feedback">
+                {%if form.errors.password %}
+                    {{form.errors.password}}
+                {% endif %}
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            <input class="form-control {% if form.non_field_errors %}is-invalid{% endif %}" type="password" placeholder="Password confirmation" name="password_confirmation" required="true" />
+            <div class="invalid-feedback" style="text-decoration: none;">
+                {% if form.non_field_errors %}
+                    {{ form.non_field_errors }}
+                {% endif %}
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            <input class="form-control {% if form.first_name.errors %}is-invalid{% endif %}" type="text" placeholder="First name" name="first_name" required="true" value="{% if form.errors %}{{ form.first_name.value }}{% endif %}"/>
+            <div class="invalid-feedback">
+                {%if form.first_name.errors %}
+                    {{form.first_name.errors}}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control {% if form.last_name.errors %}is-invalid{% endif %}" type="text" placeholder="Last name" name="last_name" required="true" value="{% if form.errors %}{{ form.last_name.value }}{% endif %}" />
+            <div class="invalid-feedback">
+                {%if form.last_name.errors %}
+                    {{form.last_name.errors}}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control {% if form.email.errors %}is-invalid{% endif %}" type="email" placeholder="Email address" name="email" required="true" value="{% if form.errors %}{{ form.email.value }}{% endif %}"/>
+            <div class="invalid-feedback">
+                {%if form.email.errors %}
+                    {{form.email.errors}}
+                {% endif %}
+            </div>
+        </div>
+
+        <button class="btn btn-primary btn-block mt-5" type="submit">Sign Up</button>
+
+    </form>
+{% endblock %}
